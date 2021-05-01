@@ -22,7 +22,7 @@ class BaseTest(unittest.TestCase):
         self.driver.close()
         self.driver.quit()
 
-class LoginTest(BaseTest):
+class A_LoginTest(BaseTest):
     def test_001_LoginSuccess(self):
 
     # Step 1 - CLick Sign In
@@ -114,7 +114,7 @@ class LoginTest(BaseTest):
 
         time.sleep(5)
 
-class RegisterTest(BaseTest):
+class B_RegisterTest(BaseTest):
 
     def test_001_RegSuccess(self):
 
@@ -440,7 +440,7 @@ class RegisterTest(BaseTest):
         time.sleep(3)
 
 
-class AddToCartTest(BaseTest):
+class C_AddToCartTest(BaseTest):
     def test_001_fromHome(self):
 
         # Step 1 - Choose Item by Moving the pointer to the item
@@ -488,6 +488,9 @@ class AddToCartTest(BaseTest):
     def test_003_fromDetail(self):
 
         # Step 1 - Click Product
+        item = self.driver.find_element_by_xpath('//*[@id="homefeatured"]/li[2]')
+        self.action.move_to_element(item).perform()
+
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="homefeatured"]/li[2]'))
         ).click()
