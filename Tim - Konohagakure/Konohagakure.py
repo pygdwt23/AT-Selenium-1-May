@@ -8,7 +8,7 @@ import time
 import unittest
 from faker import Faker
 
-fake = Faker()
+fake = Faker(["id_ID"])
 base_url = "http://automationpractice.com/index.php"
 
 class BaseTest(unittest.TestCase):
@@ -32,18 +32,18 @@ class RegisterTest(BaseTest):
     def test_001_RegSuccess(self):
 
     # Step 1 - Click Sign In button
-        WebDriverWait(self.driver,10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.CLASS_NAME, 'login'))
         ).click()
 
     # Step 2 - Type Email
         user_email = fake.ascii_email()
-        WebDriverWait(self.driver,10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'email_create'))
         ).send_keys(user_email)
 
     # Step 3 - Click Create an account button
-        WebDriverWait(self.driver,10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'SubmitCreate'))
         ).click()
 
@@ -52,20 +52,28 @@ class RegisterTest(BaseTest):
             EC.element_to_be_clickable((By.XPATH, '//*[@id="id_gender1"]'))
         ).click()
 
+        time.sleep(1)
+
     # Step 5 - Type First Name
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'customer_firstname'))
         ).send_keys("Ahmad")
+
+        time.sleep(1)
 
     # Step 6 - Type Last Name
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'customer_lastname'))
         ).send_keys("Narto")
 
+        time.sleep(1)
+
     #  Step 7 - Type Password
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="passwd"]'))
         ).send_keys("password123")
+
+        time.sleep(1)
 
     # Step 8 - Input Date of Birth
         selectDays = Select(self.driver.find_element_by_id('days'))
@@ -76,6 +84,8 @@ class RegisterTest(BaseTest):
 
         selectYears = Select(self.driver.find_element_by_id('years'))
         selectYears.select_by_value("2001")
+
+        time.sleep(1)
 
     # Step 9 - Click Sign up newsletter
     #     WebDriverWait(self.driver, 10).until(
@@ -93,11 +103,14 @@ class RegisterTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'company'))
         ).send_keys(company)
 
+        time.sleep(1)
+
     # Step 12 - Type Address
-        address1 = fake.address()
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'address1'))
-        ).send_keys(address1)
+        ).send_keys("1587 Elizabeth Trail Apt. 821")
+
+        time.sleep(1)
 
     # Step 13 - Type City
         city = fake.city()
@@ -105,18 +118,26 @@ class RegisterTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'city'))
         ).send_keys(city)
 
+        time.sleep(1)
+
     # Step 14 - Select State
         selectState = Select(self.driver.find_element_by_id('id_state'))
         selectState.select_by_visible_text("California")
+
+        time.sleep(1)
 
     # Step 15 - Type Zip code
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'postcode'))
         ).send_keys("90001")
 
+        time.sleep(1)
+
     # Step 16 - Select Country
         selectCountry = Select(self.driver.find_element_by_id('id_country'))
         selectCountry.select_by_visible_text("United States")
+
+        time.sleep(1)
 
     # Step 17 - Type Additional info
         textGen = fake.text()
@@ -124,11 +145,15 @@ class RegisterTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'other'))
         ).send_keys(textGen)
 
+        time.sleep(1)
+
     # Step 18 - Type Mobile phone
         phone = fake.phone_number()
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'phone_mobile'))
         ).send_keys(phone)
+
+        time.sleep(1)
 
     # Step 19 - Type Reference
         reference = fake.name()
@@ -146,7 +171,7 @@ class RegisterTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'submitAccount'))
         ).click()
 
-        time.sleep(5)
+        time.sleep(3)
 
     # Step 21 - Verify Register success
         registeredUser = self.driver.find_element_by_xpath('//*[@id="header"]/div[2]/div/div/nav/div[1]/a').text
@@ -154,10 +179,10 @@ class RegisterTest(BaseTest):
 
     # Step 22 - Click Log Out
         WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="header"]/div[2]/div/div/nav/div[1]/a/span'))
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="header"]/div[2]/div/div/nav/div[2]/a'))
         ).click()
 
-        time.sleep(5)
+        time.sleep(3)
 
     # def test_002_RegFailed(self):
     # def test_003_AlreadyRegistered(self):
