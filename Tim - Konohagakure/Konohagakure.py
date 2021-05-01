@@ -79,7 +79,7 @@ class A_LoginTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'SubmitLogin'))
         ).click()
 
-    # Verify Wrong Email
+    # Step 5 - Verify Wrong Email
         actualResult = self.driver.find_element_by_xpath('//*[@id="center_column"]/div[1]/ol/li').text
         self.assertEqual("Authentication failed.", actualResult)
 
@@ -108,7 +108,7 @@ class A_LoginTest(BaseTest):
             EC.element_to_be_clickable((By.ID, 'SubmitLogin'))
         ).click()
 
-        # Verify Wrong Email
+        # Step 5 - Verify Wrong Password
         actualResult = self.driver.find_element_by_xpath('//*[@id="center_column"]/div[1]/ol/li').text
         self.assertEqual("Authentication failed.", actualResult)
 
@@ -502,7 +502,7 @@ class C_AddToCartTest(BaseTest):
 
         time.sleep(3)
 
-        # Step 3 - Verify
+        # Step 3 - Verify Result
         actual_result = self.driver.find_element_by_xpath('//*[@id="layer_cart"]/div[1]/div[1]/h2').text
         self.assertEqual("Product successfully added to your shopping cart", actual_result)
 
@@ -518,18 +518,18 @@ class C_AddToCartTest(BaseTest):
             EC.element_to_be_clickable((By.NAME, 'submit_search'))
         ).click()
 
-    # Navigate to item
+    # Step 3 - Navigate to item
         item1 = self.driver.find_element_by_xpath('//*[@id="center_column"]/ul/li/div/div[1]/div')
         self.action.move_to_element(item1).perform()
 
-    # Click Add to cart
+    # Step 4 - Click Add to cart
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="center_column"]/ul/li/div/div[2]/div[2]/a[1]/span'))
         ).click()
 
         time.sleep(2)
 
-    # Verify Result
+    # Step 5 - Verify Result
         actual_result = self.driver.find_element_by_xpath('//*[@id="layer_cart"]/div[1]/div[1]/h2').text
         self.assertEqual("Product successfully added to your shopping cart", actual_result)
 
