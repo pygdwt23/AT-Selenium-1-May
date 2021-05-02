@@ -142,23 +142,26 @@ class B_RegisterTest(BaseTest):
         time.sleep(1)
 
     # Step 5 - Type First Name
+        fName = fake.first_name()
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'customer_firstname'))
-        ).send_keys("Ahmad")
+        ).send_keys(fName)
 
         time.sleep(1)
 
     # Step 6 - Type Last Name
+        lName = fake.last_name()
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'customer_lastname'))
-        ).send_keys("Narto")
+        ).send_keys(lName)
 
         time.sleep(1)
 
     #  Step 7 - Type Password
+        passwordGen = fake.password()
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="passwd"]'))
-        ).send_keys("password123")
+        ).send_keys(passwordGen)
 
         time.sleep(1)
 
@@ -261,8 +264,8 @@ class B_RegisterTest(BaseTest):
         time.sleep(3)
 
     # Step 21 - Verify Register success
-        registeredUser = self.driver.find_element_by_xpath('//*[@id="header"]/div[2]/div/div/nav/div[1]/a').text
-        self.assertEqual("Ahmad Narto", registeredUser)
+        info_account = self.driver.find_element_by_xpath('//*[@id="center_column"]/p').text
+        self.assertEqual("Welcome to your account. Here you can manage all of your personal information and orders.", info_account)
 
     # Step 22 - Click Log Out
         WebDriverWait(self.driver, 10).until(
